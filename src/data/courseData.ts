@@ -448,6 +448,559 @@ print("Substring:", string.sub(str, 1, 5))`,
           }
         }
       ]
+    },
+    {
+      id: "numbers",
+      title: "Numbers",
+      description: "Explore Lua's numeric types, arithmetic, and conversions.",
+      emoji: "🔢",
+      estimatedHours: 3,
+      xp: 150,
+      progress: 0,
+      learningObjectives: [
+        "Understand Lua's number representation (integers and floats).",
+        "Master arithmetic, relational, and mathematical operations.",
+        "Learn about number representation limits and conversions."
+      ],
+      lessons: [
+        {
+          id: "numerals-arithmetic",
+          title: "Numerals and Basic Arithmetic",
+          description: "Learn how to write numeric constants and perform basic calculations.",
+          emoji: "➕",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Numerals</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua supports both integer and floating-point numbers. Numeric constants can be written with an optional decimal part and an optional decimal exponent. Hexadecimal constants are prefixed with <code>0x</code>.
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+-- Decimal numerals
+print(4)        -- Integer
+print(0.4)      -- Float
+print(4.57e-3)  -- Scientific notation
+
+-- Hexadecimal numerals (Lua 5.3+)
+print(0xff)     -- 255
+print(0x1A3)    -- 419
+print(0x0.2)    -- 0.125 (hexadecimal float)
+print(0x1p-1)   -- 0.5 (hexadecimal float with binary exponent)
+              </pre>
+              <p class="text-gray-700 dark:text-gray-300">
+                Both integer and float values have the type "number".
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(type(3))    -- Output: number
+print(type(3.5))  -- Output: number
+print(type(3.0))  -- Output: number
+              </pre>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Arithmetic Operators</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua provides a standard set of arithmetic operators.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>+</code> (addition)</li>
+                <li><code>-</code> (subtraction)</li>
+                <li><code>*</code> (multiplication)</li>
+                <li><code>/</code> (division - always float result)</li>
+                <li><code>//</code> (floor division - rounds towards negative infinity, integer result if both operands are integers)</li>
+                <li><code>%</code> (modulo)</li>
+                <li><code>^</code> (exponentiation)</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(13 + 15)      -- Output: 28
+print(13.0 + 25)    -- Output: 38.0
+print(3 / 2)        -- Output: 1.5
+print(3 // 2)       -- Output: 1 (integer result)
+print(-9 // 2)      -- Output: -5
+print(math.pi % 0.01) -- Output: 0.0015926535897931
+print(2 ^ 3)        -- Output: 8.0
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Number Explorer",
+            description: "Experiment with different numeral formats and arithmetic operators.",
+            initialCode: `-- 1. Try to print an invalid hexadecimal numeral. What error do you get?
+-- print(0xABFG)
+
+-- 2. Predict the output of the following loop:
+-- for i = -10, 10 do
+--   print(i, i % 3)
+-- end
+
+-- Write your code below:
+`,
+            solution: `-- 1. Output: stdin:1: invalid escape sequence near '0xABFG' (or similar syntax error)
+
+-- 2. Output:
+-- -10	-1
+-- -9	0
+-- -8	1
+-- -7	-1
+-- -6	0
+-- -5	1
+-- -4	-1
+-- -3	0
+-- -2	1
+-- -1	-1
+-- 0	0
+-- 1	1
+-- 2	-1
+-- 3	0
+-- 4	1
+-- 5	-1
+-- 6	0
+-- 7	1
+-- 8	-1
+-- 9	0
+-- 10	1
+`,
+            hints: [
+              "Hexadecimal numerals only use digits 0-9 and letters A-F.",
+              "The modulo operator (%) in Lua behaves consistently for negative numbers, always having the same sign as the second argument."
+            ]
+          }
+        },
+        {
+          id: "relational-math",
+          title: "Relational Operators and Math Library",
+          description: "Understand comparison operators and use Lua's built-in math functions.",
+          emoji: "🧮",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Relational Operators</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua provides standard relational operators for comparison. All these operators always produce a Boolean value (<code>true</code> or <code>false</code>).
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>&lt;</code> (less than)</li>
+                <li><code>&gt;</code> (greater than)</li>
+                <li><code>&lt;=</code> (less than or equal to)</li>
+                <li><code>&gt;=</code> (greater than or equal to)</li>
+                <li><code>==</code> (equality)</li>
+                <li><code>~=</code> (inequality)</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(10 > 5)     -- Output: true
+print(1 == 1.0)   -- Output: true (compares mathematical values)
+print("hello" == "world") -- Output: false
+print(5 ~= 10)    -- Output: true
+              </pre>
+              <p class="text-gray-700 dark:text-gray-300">
+                Comparison of numbers disregards their subtypes (integer or float); what matters is their mathematical value.
+              </p>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Mathematical Library</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua's standard <code>math</code> library provides a rich set of mathematical functions and constants.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li>Constants: <code>math.pi</code>, <code>math.huge</code> (represents infinity)</li>
+                <li>Trigonometric functions: <code>math.sin()</code>, <code>math.cos()</code>, <code>math.tan()</code>, etc. (work in radians)</li>
+                <li>Min/Max: <code>math.max()</code>, <code>math.min()</code></li>
+                <li>Random numbers: <code>math.random()</code> (generates pseudo-random numbers), <code>math.randomseed()</code> (sets the seed)</li>
+                <li>Rounding functions: <code>math.floor()</code> (rounds towards negative infinity), <code>math.ceil()</code> (rounds towards positive infinity), <code>math.modf()</code> (returns integer and fractional parts)</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(math.sin(math.pi / 2)) -- Output: 1.0
+print(math.max(10, 7, 20))   -- Output: 20
+print(math.random(1, 6))     -- Random integer between 1 and 6
+print(math.floor(3.3))       -- Output: 3
+print(math.ceil(-3.3))       -- Output: -3
+local int_part, frac_part = math.modf(5.7)
+print(int_part, frac_part)   -- Output: 5	0.7
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Calculate Cone Volume",
+            description: "Write a function to compute the volume of a right circular cone, given its height and the angle between a generatrix and the axis.",
+            initialCode: `-- Formula for cone volume: (1/3) * pi * r^2 * h
+-- where r is the radius of the base, and h is the height.
+-- You are given height (h) and angle (alpha) in radians.
+-- Hint: r = h * tan(alpha)
+
+function cone_volume(height, angle_rad)
+  -- Write your code here
+end
+
+-- Test cases
+print(cone_volume(3, math.pi / 4)) -- Expected: approx 9.42
+print(cone_volume(5, math.pi / 6)) -- Expected: approx 14.54
+`,
+            solution: `function cone_volume(height, angle_rad)
+  local radius = height * math.tan(angle_rad)
+  local volume = (1/3) * math.pi * (radius^2) * height
+  return volume
+end`,
+            hints: [
+              "Use `math.tan()` to find the radius from the height and angle.",
+              "Remember `math.pi` for the value of Pi.",
+              "The formula for the volume of a cone is `(1/3) * pi * r^2 * h`."
+            ]
+          }
+        },
+        {
+          id: "representation-conversions",
+          title: "Number Representation and Conversions",
+          description: "Dive into how Lua handles numbers internally and how to convert between types.",
+          emoji: "🔄",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Number Representation Limits</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua 5.3+ uses 64-bit integers and double-precision floating-point numbers (floats).
+                Integers can represent values up to <code>2^63 - 1</code> (<code>math.maxinteger</code>) and down to <code>-2^63</code> (<code>math.mininteger</code>).
+                When integer operations exceed these limits, the result "wraps around".
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(math.maxinteger)      -- Output: 9223372036854775807
+print(math.mininteger)      -- Output: -9223372036854775808
+print(math.maxinteger + 1)  -- Output: -9223372036854775808 (wraps around to mininteger)
+print(math.mininteger - 1)  -- Output: 9223372036854775807 (wraps around to maxinteger)
+              </pre>
+              <p class="text-gray-700 dark:text-gray-300">
+                Double-precision floats can represent numbers with roughly 16 significant decimal digits, in a range from <code>-10^308</code> to <code>10^308</code>.
+                Floats can represent integers exactly up to <code>2^53</code>. Beyond this, precision may be lost.
+              </p>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Type Conversions</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua provides functions for explicit conversion between numbers and strings.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>tonumber(s, [base])</code>: Converts a string to a number. Returns <code>nil</code> if conversion is not possible.</li>
+                <li><code>tostring(n)</code>: Converts a number to a string.</li>
+                <li><code>math.tointeger(n)</code>: Converts a number to an integer if possible, otherwise returns <code>nil</code>.</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(tonumber("123"))        -- Output: 123
+print(tonumber("FF", 16))     -- Output: 255
+print(tonumber("hello"))      -- Output: nil
+print(tostring(42))           -- Output: "42"
+print(math.tointeger(3.0))    -- Output: 3
+print(math.tointeger(3.14))   -- Output: nil
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Integer Overflow Challenge",
+            description: "Explain the output of the following expressions related to integer overflow.",
+            initialCode: `-- Predict and explain the output of these expressions:
+print(math.maxinteger * 2)
+print(math.mininteger * 2)
+print(math.maxinteger * math.maxinteger)
+print(math.mininteger * math.mininteger)
+`,
+            solution: `-- Explanation:
+-- Lua's integer arithmetic uses 64-bit signed integers and wraps around on overflow.
+
+-- print(math.maxinteger * 2)
+-- math.maxinteger is 2^63 - 1. Multiplying by 2 gives 2^64 - 2.
+-- In 64-bit two's complement, 2^64 wraps around to 0. So, 2^64 - 2 becomes -2.
+-- Output: -2
+
+-- print(math.mininteger * 2)
+-- math.mininteger is -2^63. Multiplying by 2 gives -2^64.
+-- In 64-bit two's complement, -2^64 wraps around to 0.
+-- Output: 0
+
+-- print(math.maxinteger * math.maxinteger)
+-- (2^63 - 1) * (2^63 - 1) = 2^126 - 2^64 + 1.
+-- Since 2^126 and 2^64 are multiples of 2^64, the result modulo 2^64 is 1.
+-- Output: 1
+
+-- print(math.mininteger * math.mininteger)
+-- (-2^63) * (-2^63) = 2^126.
+-- The result modulo 2^64 is 0.
+-- Output: 0
+`,
+            hints: [
+              "Lua's integers are 64-bit signed integers.",
+              "Integer arithmetic in Lua wraps around on overflow, following two's complement rules.",
+              "Consider the values modulo 2^64."
+            ]
+          }
+        }
+    },
+    {
+      id: "strings",
+      title: "Strings",
+      description: "Learn about string literals, manipulation, and Unicode support in Lua.",
+      emoji: "💬",
+      estimatedHours: 3,
+      xp: 150,
+      progress: 0,
+      learningObjectives: [
+        "Understand string immutability and concatenation.",
+        "Master string library functions for common operations.",
+        "Explore multi-line strings and Unicode handling with UTF-8."
+      ],
+      lessons: [
+        {
+          id: "literals-concatenation",
+          title: "String Literals and Concatenation",
+          description: "Define strings using various methods and combine them.",
+          emoji: "📝",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">String Literals</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Strings in Lua are immutable sequences of bytes. They can be delimited by single or double matching quotes.
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+local single_quotes = 'Hello, Lua!'
+local double_quotes = "Welcome to Lua!"
+print(single_quotes, double_quotes)
+              </pre>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua supports C-like escape sequences for special characters:
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>\\a</code> (bell), <code>\\b</code> (back space), <code>\\f</code> (form feed), <code>\\n</code> (newline), <code>\\r</code> (carriage return), <code>\\t</code> (horizontal tab), <code>\\v</code> (vertical tab)</li>
+                <li><code>\\\\</code> (backslash), <code>\\"</code> (double quote), <code>\\'</code> (single quote)</li>
+                <li><code>\\ddd</code> (character by decimal value, up to 3 digits), <code>\\xhh</code> (character by hexadecimal value, 2 digits)</li>
+                <li><code>\\u{h...h}</code> (UTF-8 character by hexadecimal Unicode value, Lua 5.3+)</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print("Line1\\nLine2") -- Newline
+print("\\x41\\x42\\x43") -- ABC (hexadecimal)
+print("\\u{20AC}")     -- € (Euro sign, UTF-8)
+              </pre>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Long Strings</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Multi-line strings can be delimited by matching double square brackets <code>[[...]]</code>. They do not interpret escape sequences and ignore a leading newline.
+                You can add equals signs between the brackets (e.g., <code>[===[...]===]</code>) to handle nested brackets.
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+local long_string = [[
+  This is a multi-line string.
+  It can contain "quotes" and 'quotes' easily.
+  No escape sequences are interpreted here.
+]]
+print(long_string)
+              </pre>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">String Concatenation and Length</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                The concatenation operator is <code>..</code> (two dots). If any operand is a number, Lua converts it to a string.
+                The length operator <code>#</code> returns the length of a string in bytes.
+              </p>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+local name = "Lua"
+local greeting = "Hello, " .. name .. "!"
+print(greeting)   -- Output: Hello, Lua!
+print("Result is " .. 123) -- Output: Result is 123
+
+print(#greeting)  -- Output: 11 (length in bytes)
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Embed XML Fragment",
+            description: "Embed the following XML fragment as a string in a Lua program using at least two different ways:\n\n<code><![CDATA[\nHello world\n]]></code>",
+            initialCode: `-- Method 1: Using long string literal
+local xml_fragment_1 = [[
+  -- Your code here
+]]
+print(xml_fragment_1)
+
+-- Method 2: Using escaped string literal
+local xml_fragment_2 = "-- Your code here"
+print(xml_fragment_2)
+`,
+            solution: `-- Method 1: Using long string literal
+local xml_fragment_1 = [[
+<![CDATA[
+Hello world
+]]>
+]]
+
+-- Method 2: Using escaped string literal
+local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
+`,
+            hints: [
+              "For multi-line content without interpreting escapes, long string literals are ideal.",
+              "For single-line strings, you might need to escape special characters like newlines (`\\n`) and quotes (`\\"`)."
+            ]
+          }
+        },
+        {
+          id: "string-library",
+          title: "String Library Functions",
+          description: "Utilize Lua's powerful string library for common text manipulations.",
+          emoji: "✂️",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Basic String Functions</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                The <code>string</code> library provides functions for common string operations.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>string.len(s)</code>: Returns the length of string <code>s</code> (same as <code>#s</code>).</li>
+                <li><code>string.rep(s, n)</code>: Returns string <code>s</code> repeated <code>n</code> times.</li>
+                <li><code>string.reverse(s)</code>: Returns a reversed copy of string <code>s</code>.</li>
+                <li><code>string.lower(s)</code> / <code>string.upper(s)</code>: Returns a copy with letters converted to lower/upper case.</li>
+                <li><code>string.sub(s, i, j)</code>: Extracts a substring from index <code>i</code> to <code>j</code> (inclusive). Negative indices count from the end.</li>
+                <li><code>string.char(n1, n2, ...)</code>: Converts numeric values to characters.</li>
+                <li><code>string.byte(s, i, j)</code>: Returns the numeric representation of characters from index <code>i</code> to <code>j</code>.</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(string.rep("abc", 2))    -- Output: abcabc
+print(string.reverse("Lua"))   -- Output: auL
+print(string.lower("HELLO"))   -- Output: hello
+print(string.sub("example", 2, 4)) -- Output: xam
+print(string.char(76, 117, 97)) -- Output: Lua
+print(string.byte("Lua", 1))   -- Output: 76
+              </pre>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">String Formatting</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                <code>string.format(formatstring, ...)</code> is a powerful tool for formatting strings, similar to C's <code>printf</code>.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>%d</code>: decimal integer</li>
+                <li><code>%f</code>: floating-point number</li>
+                <li><code>%s</code>: string</li>
+                <li><code>%.Nf</code>: float with N decimal digits</li>
+                <li><code>%0Nd</code>: decimal with zero padding, N digits</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(string.format("Name: %s, Age: %d", "Alice", 30)) -- Output: Name: Alice, Age: 30
+print(string.format("Pi: %.2f", math.pi)) -- Output: Pi: 3.14
+print(string.format("Number: %05d", 42)) -- Output: Number: 00042
+              </pre>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Pattern Matching (Introduction)</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua's <code>string</code> library also includes functions for pattern matching, which are more powerful than simple substring searches.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>string.find(s, pattern, [init], [plain])</code>: Searches for a pattern in <code>s</code>.</li>
+                <li><code>string.gsub(s, pattern, replacement, [n])</code>: Replaces occurrences of a pattern.</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+print(string.find("hello world", "world")) -- Output: 7	11
+print(string.gsub("hello world", "l", "X")) -- Output: heXXo worXd	3
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Insert String into Another",
+            description: "Write a function `insert(s, pos, sub)` that inserts string `sub` into string `s` at position `pos`.",
+            initialCode: `-- Example: insert("hello world", 7, "small ") should return "hello small world"
+
+function insert(s, pos, sub)
+  -- Write your code here
+end
+
+-- Test cases
+print(insert("hello world", 1, "start: ")) -- Expected: start: hello world
+print(insert("hello world", 7, "small ")) -- Expected: hello small world
+print(insert("Lua", 4, "Learn")) -- Expected: LuaLearn
+`,
+            solution: `function insert(s, pos, sub)
+  return string.sub(s, 1, pos - 1) .. sub .. string.sub(s, pos)
+end`,
+            hints: [
+              "Use `string.sub()` to get the part of the string before `pos` and the part from `pos` onwards.",
+              "Use the concatenation operator `..` to combine the parts with the `sub` string."
+            ]
+          }
+        },
+        {
+          id: "unicode-utf8",
+          title: "Unicode and UTF-8",
+          description: "Understand Lua's support for Unicode strings, especially UTF-8.",
+          emoji: "🌍",
+          xp: 30,
+          completed: false,
+          content: `
+            <div class="space-y-6">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">UTF-8 Encoding in Lua</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                Lua is 8-bit clean, meaning strings can contain any byte value. UTF-8 is the dominant encoding for Unicode on the Web and is well-supported in Lua.
+                UTF-8 represents characters using a variable number of bytes. ASCII characters use a single byte.
+              </p>
+              <p class="text-gray-700 dark:text-gray-300">
+                Many <code>string</code> library functions "just work" with UTF-8 strings (e.g., concatenation, comparison). However, functions that assume one character equals one byte (like <code>string.len</code>, <code>string.sub</code>, <code>string.byte</code>, <code>string.char</code>, <code>string.lower</code>, <code>string.upper</code>) operate on bytes, not characters.
+              </p>
+
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">The <code>utf8</code> Library (Lua 5.3+)</h2>
+              <p class="text-gray-700 dark:text-gray-300">
+                The <code>utf8</code> library provides functions for proper Unicode character handling.
+              </p>
+              <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                <li><code>utf8.len(s)</code>: Returns the number of UTF-8 characters (codepoints) in <code>s</code>. Validates the string.</li>
+                <li><code>utf8.char(n1, n2, ...)</code>: Converts Unicode codepoints to a UTF-8 string.</li>
+                <li><code>utf8.codepoint(s, [i], [j])</code>: Returns the codepoints of characters in <code>s</code> from byte position <code>i</code> to <code>j</code>.</li>
+                <li><code>utf8.offset(s, n, [i])</code>: Returns the byte offset of the <code>n</code>-th character from byte position <code>i</code>. Useful for `string.sub` with character counts.</li>
+                <li><code>utf8.codes(s)</code>: An iterator that returns byte position and codepoint for each character in <code>s</code>.</li>
+              </ul>
+              <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+local s = "ação"
+print(utf8.len(s)) -- Output: 4 (characters)
+print(#s)          -- Output: 5 (bytes, 'ç' is 2 bytes)
+
+print(utf8.char(97, 231, 227, 111)) -- Output: ação
+
+local pos, cp = utf8.codepoint(s, 3) -- Codepoint at byte position 3 ('ç')
+print(pos, cp) -- Output: 231
+
+local char_offset = utf8.offset(s, 2) -- Byte offset of 2nd char ('ç')
+print(char_offset) -- Output: 3
+print(string.sub(s, char_offset, char_offset)) -- Output: ç
+
+for byte_pos, codepoint in utf8.codes(s) do
+  print(byte_pos, codepoint)
+end
+-- Output:
+-- 1	97
+-- 3	231
+-- 4	227
+-- 6	111
+              </pre>
+            </div>
+          `,
+          challenge: {
+            title: "Check Palindrome",
+            description: "Write a function `is_palindrome(s)` that checks if a given string `s` is a palindrome (reads the same forwards and backwards).",
+            initialCode: `-- A palindrome is a word, phrase, or sequence that reads the same backwards as forwards.
+-- Example: "madam", "racecar"
+
+function is_palindrome(s)
+  -- Write your code here
+end
+
+-- Test cases
+print(is_palindrome("madam"))     -- Expected: true
+print(is_palindrome("racecar"))   -- Expected: true
+print(is_palindrome("hello"))     -- Expected: false
+print(is_palindrome("Ação"))      -- Expected: false (due to byte-based string.reverse)
+`,
+            solution: `function is_palindrome(s)
+  return s == string.reverse(s)
+end`,
+            hints: [
+              "The `string.reverse()` function can be very useful here.",
+              "For simple ASCII strings, direct comparison after reversing is sufficient."
+            ]
+          }
+        }
+      ]
     }
   ]
 };
