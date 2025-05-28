@@ -845,7 +845,6 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
           xp: 30,
           completed: false,
           content: `
-            ]
             <div class="space-y-6">
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Basic String Functions</h2>
               <p class="text-gray-700 dark:text-gray-300">
@@ -853,7 +852,6 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
               </p>
               <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                 <li><code>string.len(s)</code>: Returns the length of string <code>s</code> (same as <code>#s</code>).</li>
-                )
                 <li><code>string.rep(s, n)</code>: Returns string <code>s</code> repeated <code>n</code> times.</li>
                 <li><code>string.reverse(s)</code>: Returns a reversed copy of string <code>s</code>.</li>
                 <li><code>string.lower(s)</code> / <code>string.upper(s)</code>: Returns a copy with letters converted to lower/upper case.</li>
@@ -862,12 +860,6 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
                 <li><code>string.byte(s, i, j)</code>: Returns the numeric representation of characters from index <code>i</code> to <code>j</code>.</li>
               </ul>
               <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
-          }
-        }
-      ]
-    }
-  ]
-}
 print(string.rep("abc", 3))    -- Output: abcabcabc
 print(string.reverse("A Long Line!")) -- Output: !eniL gnoL A
 print(string.lower("A Long Line!")) -- Output: a long line! 
