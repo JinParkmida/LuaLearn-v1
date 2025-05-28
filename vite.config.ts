@@ -9,7 +9,7 @@ export default defineConfig({
   },
   esbuild: {
     loader: {
-      '.ts': 'tsx'
+      '.ts': 'ts'
     }
   }
 });
