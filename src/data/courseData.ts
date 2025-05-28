@@ -1,175 +1,233 @@
-// Comprehensive Lua course data structure
+// Enhanced Lua course data structure with modern, engaging format
 export const courseData = {
-  title: "Lua Programming for Beginners",
-  description: "A comprehensive guide to learning Lua from scratch",
+  title: "Lua Programming",
+  description: "Master Lua through interactive lessons and real-world projects",
   modules: [
     {
-      id: "introduction",
-      title: "Introduction to Lua",
-      description: "Get started with the basics of Lua programming language",
+      id: "getting-started",
+      title: "Getting Started",
+      description: "Begin your journey into Lua programming",
+      emoji: "🚀",
       estimatedHours: 2,
+      xp: 100,
+      progress: 0,
       learningObjectives: [
-        "Understand what Lua is and its history",
-        "Learn about Lua's design philosophy",
-        "Set up a Lua development environment",
-        "Write and run your first Lua program"
+        "Understand what makes Lua special",
+        "Write your first Lua program",
+        "Master basic syntax and concepts"
       ],
       lessons: [
         {
-          id: "what-is-lua",
-          title: "What is Lua?",
-          description: "An introduction to the Lua programming language and its history",
+          id: "welcome-to-lua",
+          title: "Welcome to Lua",
+          description: "Your first steps into the world of Lua programming",
+          emoji: "👋",
+          xp: 25,
           completed: false,
           content: `
-            <h2>What is Lua?</h2>
-            <p>Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports procedural programming, object-oriented programming, functional programming, data-driven programming, and data description.</p>
-            
-            <h3>History and Development</h3>
-            <p>Lua was created in 1993 by Roberto Ierusalimschy, Waldemar Celes, and Luiz Henrique de Figueiredo at PUC-Rio, the Pontifical Catholic University of Rio de Janeiro in Brazil. The name "Lua" means "moon" in Portuguese.</p>
-            
-            <h3>Key Features</h3>
-            <ul>
-              <li><strong>Lightweight:</strong> The complete Lua interpreter and all standard libraries typically compile to less than 500KB.</li>
-              <li><strong>Efficient:</strong> Lua has one of the fastest execution speeds among interpreted languages.</li>
-              <li><strong>Portable:</strong> Runs on all platforms that have a standard C compiler.</li>
-              <li><strong>Embeddable:</strong> Easily integrates with applications, especially games.</li>
-              <li><strong>Simple and Flexible:</strong> Clean syntax with powerful meta-features.</li>
-            </ul>
-            
-            <h3>Where is Lua Used?</h3>
-            <p>Lua finds applications in various domains:</p>
-            <ul>
-              <li><strong>Game Development:</strong> Used in games like World of Warcraft, Roblox, and Adobe Lightroom</li>
-              <li><strong>Embedded Systems:</strong> Popular in IoT devices and embedded applications</li>
-              <li><strong>Scientific Computing:</strong> Used in research and data analysis</li>
-              <li><strong>Web Development:</strong> Powers parts of Nginx and Apache</li>
-              <li><strong>Mobile Applications:</strong> Used in mobile app development</li>
-            </ul>
-            
-            <h3>Why Learn Lua?</h3>
-            <ul>
-              <li>Easy to learn, especially for beginners</li>
-              <li>Clean, readable syntax</li>
-              <li>Powerful features in a small package</li>
-              <li>Large community and extensive documentation</li>
-              <li>High demand in game development</li>
-            </ul>
+            <div class="space-y-8">
+              <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl p-8 shadow-lg">
+                <h1 class="text-3xl font-bold mb-4">Welcome to Lua! 👋</h1>
+                <p class="text-xl opacity-90">Ready to start your coding journey? Let's dive into what makes Lua amazing!</p>
+              </div>
+
+              <div class="space-y-6">
+                <section>
+                  <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">What is Lua? 🤔</h2>
+                  <p class="text-lg text-gray-700 dark:text-gray-300">
+                    Lua is like a Swiss Army knife in the programming world - small, powerful, and incredibly versatile! 
+                    Created in 1993, it's now used everywhere from game development to smart devices.
+                  </p>
+                </section>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Why Lua is Awesome</h3>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">🚀</span>
+                        <span>Super fast and lightweight</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">🎮</span>
+                        <span>Powers many popular games</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">📱</span>
+                        <span>Great for mobile apps</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600 dark:text-purple-400">Who Uses Lua?</h3>
+                    <ul class="space-y-3">
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">🎯</span>
+                        <span>Roblox developers</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">⚔️</span>
+                        <span>World of Warcraft modders</span>
+                      </li>
+                      <li class="flex items-start">
+                        <span class="text-2xl mr-3">🤖</span>
+                        <span>IoT developers</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/30 rounded-xl p-6 border-l-4 border-blue-500">
+                  <h3 class="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-300">Fun Fact! 🌙</h3>
+                  <p class="text-blue-700 dark:text-blue-200">
+                    "Lua" means "moon" in Portuguese! The name was chosen because it was designed to illuminate and extend other programs, just like the moon reflects the sun's light.
+                  </p>
+                </div>
+              </div>
+            </div>
           `,
-          keyConcepts: [
-            "Lua is a lightweight, efficient programming language",
-            "Created in 1993 at PUC-Rio in Brazil",
-            "Widely used in game development and embedded systems",
-            "Known for its simplicity and flexibility",
-            "Excellent first programming language"
-          ],
-          initialCode: "-- Your first Lua program\nprint('Hello from Lua!')\n\n-- Let's do some simple math\nlocal number = 42\nprint('The answer is: ' .. number)\n\n-- Basic string manipulation\nlocal name = 'Lua Learner'\nprint('Welcome, ' .. name .. '!')"
+          challenge: {
+            title: "Your First Lua Program",
+            description: "Let's write a program that greets the world!",
+            initialCode: "-- Write your first Lua program!\n-- Hint: Use print() to display text\n\n",
+            solution: 'print("Hello, Lua!")',
+            hints: [
+              "The print() function displays text on the screen",
+              "Text strings in Lua need to be wrapped in quotes",
+              'Try: print("Hello, Lua!")'
+            ],
+            validation: {
+              criteria: [
+                "Uses print function",
+                "Outputs a greeting"
+              ]
+            }
+          },
+          practice: {
+            title: "Practice Time!",
+            description: "Try these fun exercises to reinforce what you've learned",
+            exercises: [
+              {
+                title: "Greeting Machine",
+                description: "Create different greetings using print()",
+                initialCode: "-- Create three different greetings\n\n",
+                hints: ["Try using different messages", "You can print multiple lines"]
+              }
+            ]
+          }
         },
         {
-          id: "setup-environment",
-          title: "Setting Up Your Environment",
-          description: "Learn how to set up Lua on your computer and use the online editor",
+          id: "lua-basics",
+          title: "Lua Basics",
+          description: "Learn the fundamental building blocks of Lua",
+          emoji: "🔨",
+          xp: 35,
           completed: false,
           content: `
-            <h2>Setting Up Your Lua Environment</h2>
-            <p>While we provide an online editor for immediate practice, understanding how to set up Lua locally is important for real development.</p>
-            
-            <h3>Using the Online Editor</h3>
-            <p>Our interactive editor provides:</p>
-            <ul>
-              <li>Instant code execution</li>
-              <li>Syntax highlighting</li>
-              <li>Error reporting</li>
-              <li>Code sharing capabilities</li>
-            </ul>
-            
-            <h3>Local Installation</h3>
-            <p>To install Lua locally:</p>
-            <ul>
-              <li><strong>Windows:</strong> Download from LuaBinaries or use Windows Subsystem for Linux</li>
-              <li><strong>macOS:</strong> Use Homebrew: brew install lua</li>
-              <li><strong>Linux:</strong> Use package manager: apt-get install lua5.4 (Ubuntu/Debian)</li>
-            </ul>
-            
-            <h3>Verifying Installation</h3>
-            <p>After installation, open a terminal and type:</p>
-            <pre><code>lua -v</code></pre>
-            <p>This should display the Lua version number.</p>
-            
-            <h3>Text Editors and IDEs</h3>
-            <p>Recommended editors for Lua development:</p>
-            <ul>
-              <li>Visual Studio Code with Lua extension</li>
-              <li>ZeroBrane Studio (Lua-specific IDE)</li>
-              <li>Sublime Text with Lua package</li>
-              <li>Notepad++ with Lua syntax highlighting</li>
-            </ul>
+            <div class="space-y-8">
+              <div class="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-xl p-8 shadow-lg">
+                <h1 class="text-3xl font-bold mb-4">Lua Basics 🔨</h1>
+                <p class="text-xl opacity-90">Let's learn the building blocks of Lua programming!</p>
+              </div>
+
+              <div class="space-y-6">
+                <section>
+                  <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Variables and Data Types</h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                      <h3 class="text-xl font-semibold mb-4 text-teal-600 dark:text-teal-400">Numbers</h3>
+                      <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+age = 25
+score = 99.5</pre>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                      <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Strings</h3>
+                      <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+name = "Luna"
+message = 'Hello!'</pre>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="bg-purple-50 dark:bg-purple-900/30 rounded-xl p-6 border-l-4 border-purple-500">
+                  <h3 class="text-xl font-semibold mb-4 text-purple-800 dark:text-purple-300">Pro Tip! 💡</h3>
+                  <p class="text-purple-700 dark:text-purple-200">
+                    In Lua, variables are global by default. Use the 'local' keyword to create variables that are only accessible in their own scope!
+                  </p>
+                </div>
+              </div>
+            </div>
           `,
-          keyConcepts: [
-            "Understanding the online editor features",
-            "Installing Lua on different operating systems",
-            "Verifying Lua installation",
-            "Choosing appropriate development tools"
-          ],
-          initialCode: "-- Let's verify our Lua environment\n\n-- Print Lua version\nprint(_VERSION)\n\n-- Basic arithmetic to test execution\nlocal a = 10\nlocal b = 20\nprint('Sum:', a + b)\n\n-- String manipulation test\nlocal message = 'Environment setup successful!'\nprint(message)"
+          challenge: {
+            title: "Variable Master",
+            description: "Create and use different types of variables",
+            initialCode: "-- Create variables for:\n-- 1. Your age\n-- 2. Your name\n-- 3. Print them both!\n\n",
+            solution: 'local age = 25\nlocal name = "Coder"\nprint("Name:", name, "Age:", age)',
+            hints: [
+              "Remember to use local for variables",
+              "Strings need quotes, numbers don't",
+              "print() can take multiple arguments"
+            ]
+          }
         }
       ]
     },
     {
-      id: "fundamentals",
-      title: "Lua Fundamentals",
-      description: "Master the core concepts of Lua programming",
-      estimatedHours: 4,
+      id: "control-flow",
+      title: "Control Flow",
+      description: "Master decision-making in your programs",
+      emoji: "🔄",
+      estimatedHours: 3,
+      xp: 150,
+      progress: 0,
       learningObjectives: [
-        "Understand Lua's lexical conventions",
-        "Learn about variables and data types",
-        "Master control structures",
-        "Work with functions and scope"
+        "Understand if statements",
+        "Work with loops",
+        "Handle conditions"
       ],
       lessons: [
         {
-          id: "lexical-conventions",
-          title: "Lexical Conventions",
-          description: "Learn about Lua's basic syntax rules and structure",
+          id: "if-statements",
+          title: "Making Decisions",
+          description: "Learn how to make your programs smart with if statements",
+          emoji: "🤔",
+          xp: 40,
           completed: false,
           content: `
-            <h2>Lexical Conventions in Lua</h2>
-            
-            <h3>Comments</h3>
-            <p>Lua supports single-line and multi-line comments:</p>
-            <pre><code>-- This is a single-line comment
+            <div class="space-y-8">
+              <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl p-8 shadow-lg">
+                <h1 class="text-3xl font-bold mb-4">Making Decisions 🤔</h1>
+                <p class="text-xl opacity-90">Time to make your programs smart!</p>
+              </div>
 
---[[
-  This is a
-  multi-line comment
-]]</code></pre>
-
-            <h3>Identifiers</h3>
-            <p>Valid identifier names in Lua:</p>
-            <ul>
-              <li>Start with a letter or underscore</li>
-              <li>Can contain letters, digits, and underscores</li>
-              <li>Are case-sensitive</li>
-              <li>Cannot be reserved words</li>
-            </ul>
-
-            <h3>Reserved Words</h3>
-            <p>Lua's reserved words:</p>
-            <pre><code>and       break     do        else      elseif
-end       false     for       function  goto
-if        in        local     nil       not
-or        repeat    return    then      true
-until     while</code></pre>
-
-            <h3>Chunks</h3>
-            <p>A chunk is a sequence of statements that Lua executes. Each source file is a chunk, and each string of code you execute is a chunk.</p>
+              <div class="space-y-6">
+                <section>
+                  <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">If Statements</h2>
+                  <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                    <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+if score >= 90 then
+    print("A grade!")
+elseif score >= 80 then
+    print("B grade!")
+else
+    print("Keep practicing!")
+end</pre>
+                  </div>
+                </section>
+              </div>
+            </div>
           `,
-          keyConcepts: [
-            "Understanding Lua comments",
-            "Proper naming conventions",
-            "Reserved words in Lua",
-            "Code organization in chunks"
-          ],
-          initialCode: "-- Let's practice with comments and printing\n\n-- Single-line comment\nprint('Hello')\n\n--[[\n  Multi-line\n  comment\n]]\nprint('World')\n\n-- Working with identifiers\nlocal userName = 'John'  -- Valid identifier\nlocal user_age = 25     -- Also valid\n\nprint(userName, user_age)"
+          challenge: {
+            title: "Grade Calculator",
+            description: "Create a program that assigns letter grades based on scores",
+            initialCode: "-- Create a grade calculator\n-- Use if statements to assign A, B, C, D, or F\n\n",
+            hints: [
+              "Start with the highest grade first",
+              "Use >= for comparisons",
+              "Don't forget the end keyword"
+            ]
+          }
         }
       ]
     }
