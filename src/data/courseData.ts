@@ -24,10 +24,10 @@ export const courseData = {
           emoji: "👋",
           xp: 25,
           completed: false,
-          content: `<div class="space-y-8">
-            <section class="space-y-6">
-              <h2 class="text-2xl font-bold text-gray-900 dark:text-white">What is Lua?</h2>
-              <p class="text-lg text-gray-700 dark:text-gray-300">
+          content: `<div className="space-y-8">
+            <section className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">What is Lua?</h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300">
                 Lua is a powerful, efficient, lightweight, embeddable scripting language. Created in 1993 at PUC-Rio, it has become one of the leading scripting languages worldwide, particularly in game development and embedded systems.
               </p>
             </section>
