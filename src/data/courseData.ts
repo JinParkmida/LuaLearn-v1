@@ -730,6 +730,7 @@ print(math.mininteger * math.mininteger)
             ]
           }
         }
+      ]
     },
     {
       id: "strings",
@@ -844,6 +845,7 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
           xp: 30,
           completed: false,
           content: `
+            ]
             <div class="space-y-6">
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Basic String Functions</h2>
               <p class="text-gray-700 dark:text-gray-300">
@@ -851,6 +853,7 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
               </p>
               <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                 <li><code>string.len(s)</code>: Returns the length of string <code>s</code> (same as <code>#s</code>).</li>
+                )
                 <li><code>string.rep(s, n)</code>: Returns string <code>s</code> repeated <code>n</code> times.</li>
                 <li><code>string.reverse(s)</code>: Returns a reversed copy of string <code>s</code>.</li>
                 <li><code>string.lower(s)</code> / <code>string.upper(s)</code>: Returns a copy with letters converted to lower/upper case.</li>
@@ -859,6 +862,12 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
                 <li><code>string.byte(s, i, j)</code>: Returns the numeric representation of characters from index <code>i</code> to <code>j</code>.</li>
               </ul>
               <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+          }
+        }
+      ]
+    }
+  ]
+}
 print(string.rep("abc", 3))    -- Output: abcabcabc
 print(string.reverse("A Long Line!")) -- Output: !eniL gnoL A
 print(string.lower("A Long Line!")) -- Output: a long line! 
@@ -898,7 +907,7 @@ print(string.gsub("hello world", "l", "X")) -- Output: heXXo worXd	3
           `,
           challenge: {
             title: "Insert String into Another",
-            description: "Write a function `insert(s, pos, sub)` that inserts string `sub` into string `s` at position `pos`.",
+            description: "Write a function \`insert(s, pos, sub)` that inserts string \`sub` into string `s\` at position `pos`.",
             initialCode: `-- Example: insert("hello world", 7, "small ") should return "hello small world"
 
 function insert(s, pos, sub)
@@ -945,7 +954,7 @@ end`,
                 <li><code>utf8.len(s)</code>: Returns the number of UTF-8 characters (codepoints) in <code>s</code>. Validates the string.</li>
                 <li><code>utf8.char(n1, n2, ...)</code>: Converts Unicode codepoints to a UTF-8 string.</li>
                 <li><code>utf8.codepoint(s, [i], [j])</code>: Returns the codepoints of characters in <code>s</code> from byte position <code>i</code> to <code>j</code>.</li>
-                <li><code>utf8.offset(s, n, [i])</code>: Returns the byte offset of the <code>n</code>-th character from byte position <code>i</code>. Useful for `string.sub` with character counts.</li>
+                <li><code>utf8.offset(s, n, [i])</code>: Returns the byte offset of the <code>n</code>-th character from byte position <code>i</code>. Useful for \`string.sub` with character counts.</li>
                 <li><code>utf8.codes(s)</code>: An iterator that returns byte position and codepoint for each character in <code>s</code>.</li>
               </ul>
               <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
