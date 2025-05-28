@@ -859,12 +859,10 @@ local xml_fragment_2 = "<![CDATA[\\nHello world\\n]]>"
                 <li><code>string.byte(s, i, j)</code>: Returns the numeric representation of characters from index <code>i</code> to <code>j</code>.</li>
               </ul>
               <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
-print(string.rep("abc", 2))    -- Output: abcabc
-print(string.reverse("Lua"))   -- Output: auL
-print(string.lower("HELLO"))   -- Output: hello
-print(string.sub("example", 2, 4)) -- Output: xam
-print(string.char(76, 117, 97)) -- Output: Lua
-print(string.byte("Lua", 1))   -- Output: 76
+print(string.rep("abc", 3))    -- Output: abcabcabc
+print(string.reverse("A Long Line!")) -- Output: !eniL gnoL A
+print(string.lower("A Long Line!")) -- Output: a long line! 
+print(string.upper("A Long Line!")) -- Output: A LONG LINE! 
               </pre>
 
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white">String Formatting</h2>
@@ -997,6 +995,196 @@ end`,
             hints: [
               "The `string.reverse()` function can be very useful here.",
               "For simple ASCII strings, direct comparison after reversing is sufficient."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      id: "tables",
+      title: "Tables",
+      description: "Master Lua's powerful table data structure",
+      emoji: "📊",
+      estimatedHours: 4,
+      xp: 175,
+      progress: 0,
+      learningObjectives: [
+        "Understand tables as Lua's primary data structure",
+        "Learn to use tables as arrays, dictionaries, and objects",
+        "Master table traversal and manipulation techniques",
+        "Explore the table library functions"
+      ],
+      lessons: [
+        {
+          id: "table-indices",
+          title: "Table Indices",
+          description: "Learn how to index and access data in Lua tables",
+          emoji: "🔑",
+          xp: 35,
+          completed: false,
+          content: `
+            <div class="space-y-8">
+              <section class="space-y-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Understanding Table Indices</h2>
+                
+                <p class="text-lg text-gray-700 dark:text-gray-300">
+                  Tables in Lua are the main (in fact, the only) data structuring mechanism. They can be used to represent arrays, sets, records, and many other data structures in a simple, uniform, and efficient way.
+                </p>
+                
+                <p class="text-gray-700 dark:text-gray-300">
+                  A table in Lua is essentially an associative array. It can accept not only numbers as indices, but also strings or any other value of the language (except nil).
+                </p>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Creating and Using Tables</h3>
+                  <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+-- Create an empty table
+local a = {}
+
+-- Add elements with different types of keys
+local k = "x"
+a[k] = 10           -- a["x"] = 10
+a[20] = "great"     -- a[20] = "great"
+a["x"] = a["x"] + 1 -- a["x"] = 11
+
+-- Access elements
+print(a["x"])       -- 11
+print(a[k])         -- 11
+print(a[20])        -- "great"
+                  </pre>
+                  <p class="mt-3 text-gray-600 dark:text-gray-400">
+                    Tables are created using constructor expressions, with the simplest form being <code>{}</code>. You can then add key-value pairs using the square bracket notation.
+                  </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Tables as References</h3>
+                  <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+-- Tables are references
+local a = {}
+local b = a         -- 'b' refers to the same table as 'a'
+
+a["x"] = 10
+print(b["x"])       -- 10 (changes to 'a' affect 'b')
+
+b["x"] = 20
+print(a["x"])       -- 20 (changes to 'b' affect 'a')
+
+a = nil             -- 'a' no longer refers to the table
+-- 'b' still refers to the table
+                  </pre>
+                  <p class="mt-3 text-gray-600 dark:text-gray-400">
+                    Tables in Lua are objects, not values. When you assign a table to a variable, you're assigning a reference to that table, not copying the table itself.
+                  </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Using Strings as Keys</h3>
+                  <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+-- Table with string keys
+local person = {}
+person["name"] = "John"
+person["age"] = 30
+
+-- Dot notation (syntactic sugar)
+person.profession = "Developer"
+
+-- Both notations are equivalent
+print(person.name)        -- "John"
+print(person["name"])     -- "John"
+                  </pre>
+                  <p class="mt-3 text-gray-600 dark:text-gray-400">
+                    When using strings as keys, Lua provides a convenient dot notation as syntactic sugar. <code>a.name</code> is equivalent to <code>a["name"]</code>.
+                  </p>
+                </div>
+
+                <div class="bg-yellow-50 dark:bg-yellow-900/30 rounded-xl p-6">
+                  <h3 class="text-xl font-semibold mb-4 text-yellow-800 dark:text-yellow-300">Common Pitfalls</h3>
+                  <p class="text-yellow-700 dark:text-yellow-200 mb-4">
+                    Be careful not to confuse <code>a.x</code> with <code>a[x]</code>:
+                  </p>
+                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-md">
+local a = {}
+local x = "y"
+
+a[x] = 10       -- a["y"] = 10
+print(a[x])     -- 10 (value of a["y"])
+print(a.x)      -- nil (value of a["x"], which is undefined)
+print(a.y)      -- 10 (value of a["y"])
+                  </pre>
+                  <p class="mt-3 text-yellow-700 dark:text-yellow-200">
+                    <code>a.x</code> refers to <code>a["x"]</code> (a table indexed by the string "x"), while <code>a[x]</code> refers to <code>a[value_of_x]</code> (a table indexed by the value of variable x).
+                  </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Type Coercion with Indices</h3>
+                  <pre class="bg-gray-50 dark:bg-gray-900 p-4 rounded-md">
+local a = {}
+
+-- Different types of keys
+a[10] = "number key"
+a["10"] = "string key"
+a["+10"] = "another string key"
+
+print(a[10])            -- "number key"
+print(a["10"])          -- "string key"
+print(a["+10"])         -- "another string key"
+
+-- Conversion between types
+print(a[tonumber("10")]) -- "number key"
+print(a[tonumber("+10")]) -- "number key"
+                  </pre>
+                  <p class="mt-3 text-gray-600 dark:text-gray-400">
+                    Be careful with type coercion. The string "10" and the number 10 are different keys in a table. However, integers and floats with the same value (like 2 and 2.0) refer to the same key.
+                  </p>
+                </div>
+              </section>
+            </div>
+          `,
+          challenge: {
+            title: "Table Index Explorer",
+            description: "Create a table and experiment with different types of indices to understand how they work.",
+            initialCode: `-- Create a table with various types of indices
+-- Try to include:
+-- 1. Numeric indices (both integer and float)
+-- 2. String indices (both with bracket notation and dot notation)
+-- 3. A variable as an index
+-- 4. Demonstrate the difference between t.x and t[x]
+
+-- Write your code below:
+
+`,
+            solution: `-- Table index exploration
+local t = {}
+
+-- Numeric indices
+t[1] = "First element"
+t[2.0] = "Second element"  -- Same as t[2]
+
+-- String indices
+t["name"] = "John"
+t.age = 30                 -- Same as t["age"]
+
+-- Variable as index
+local key = "occupation"
+t[key] = "Developer"       -- t["occupation"]
+
+-- Difference between t.x and t[x]
+local x = "name"
+print("t.x:", t.x)         -- nil (t["x"])
+print("t[x]:", t[x])       -- "John" (t["name"])
+
+-- Print all entries
+print("\\nAll table entries:")
+for k, v in pairs(t) do
+  print(k, v)
+end`,
+            hints: [
+              "Remember that t.x is equivalent to t['x'], not t[x]",
+              "Integers and floats with the same value (like 2 and 2.0) are treated as the same key",
+              "Use the pairs() function to iterate through all key-value pairs in a table",
+              "nil cannot be used as a key in a table"
             ]
           }
         }
